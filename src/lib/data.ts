@@ -16,7 +16,7 @@ export interface Shop {
 
 // Parse CSV data
 export async function loadShopsFromCSV(): Promise<Shop[]> {
-  const response = await fetch('/southern_shop_checkin_report.csv');
+  const response = await fetch('/southern_shops_distributed.csv');
   const csvText = await response.text();
   
   return new Promise((resolve) => {
