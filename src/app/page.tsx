@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { loadShopsFromCSV, Shop } from '@/lib/data';
 
 const GoogleMap = dynamic(() => import('@/components/GoogleMap'), {
@@ -34,6 +35,8 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col relative">
+      {/* Navigation */}
+
       <div className="flex-grow w-full h-screen">
         <GoogleMap shops={shops} />
       </div>
