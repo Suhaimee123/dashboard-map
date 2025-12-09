@@ -60,7 +60,7 @@ export default function GoogleMapComponent({ shops }: { shops: Shop[] }) {
 
         // Create markers
         const markers = shops.map((shop) => {
-            const bgColor = shop.checkedIn ? '#9333ea' : '#dc2626';
+            const bgColor = shop.checkedIn ? '#3933eaff' : '#dc2626';
 
             const marker = new google.maps.Marker({
                 position: { lat: shop.lat, lng: shop.lng },
