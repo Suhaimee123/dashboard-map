@@ -16,7 +16,7 @@ export interface Shop {
 
 // Parse CSV data
 export async function loadShopsFromCSV(): Promise<Shop[]> {
-  const response = await fetch('/southern_shops_distributed.csv');
+  const response = await fetch('/thailand_shops_full_coverage.csv');
   const csvText = await response.text();
   
   return new Promise((resolve) => {
@@ -24,17 +24,17 @@ export async function loadShopsFromCSV(): Promise<Shop[]> {
       header: true,
       complete: (results) => {
         const shops: Shop[] = results.data
-          .filter((row: any) => row.Shop_ID && row.Shop_Latitude && row.Shop_Longitude)
+          .filter((row: any) => row.Shop_ID && row.Shop_Lat && row.Shop_Lon)
           .map((row: any) => ({
             id: row.Shop_ID,
             name: row.Shop_Name,
             province: row.Province,
-            salesRep: row.Sales_Rep,
-            lat: parseFloat(row.Shop_Latitude),
-            lng: parseFloat(row.Shop_Longitude),
+            salesRep: row.Region || '-',
+            lat: parseFloat(row.Shop_Lat),
+            lng: parseFloat(row.Shop_Lon),
             checkedIn: row.Visit_Status === 'Checked-in',
-            timestamp: row.Checkin_Timestamp || undefined,
-            distance: row['Distance_From_Shop(m)'] ? parseFloat(row['Distance_From_Shop(m)']) : undefined,
+            timestamp: row.Checkin_Time || undefined,
+            distance: row.Distance_m ? parseFloat(row.Distance_m) : undefined,
             remark: row.Remark || undefined,
             address: `${row.Province}, ไทย`,
           }));
